@@ -1,14 +1,16 @@
 FROM ubuntu:18.10
 
+ARG DEBIAN_FRONTEND=noninteractive
 ENV APP_NAME Overviewer for Minecraft
 ENV APP_DIR INSTALL
 ENV MC_VERSION 1.13
 ENV DATA = $(date -Idate)
 
 RUN apt-get update && echo $DATE
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN echo "deb https://overviewer.org/debian ./" >> /etc/apt/sources.list
 RUN apt-get -y install apt-transport-https > /dev/null
-RUN apt-get -y install wget > /dev/null
+RUN apt-get -y install wget gnupg > /dev/null
 RUN wget -nv -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add -
 RUN apt-get update && echo $DATE
 RUN apt-get -y install minecraft-overviewer > /dev/null
@@ -22,12 +24,12 @@ RUN echo -e ' ************************************************** \n' \
   "                             -v <host-config-&-texture-dir>:/root/config \\ \n" \
   "                             -v <host-render-output-dir>:/root/render_output \\ \n" \
   "                             <image_name> overviewer.py --config=/root/config/<config file> /root/render_output\n" \
-  "   Simple run without config: \"
+  "   Simple run without config: \n"  \
   "   	  	  	docker run -v <host-world-dir>:/root/world \\ \n" \
   "                             -v <host-render-output-dir>:/root/render_output \\ \n" \
   "                             <image_name> overviewer.py /root/world /root/render_output \n" \  
   "   Configure overviewer: \n" \
-  "			Put configuration file(s) in volume mounted to /root/config. \n" \
+  '			Put configuration file(s) in volume mounted to /root/config. \n' \
   "			Output will be rendered in /root/render_output. \n" \
 '**************************************************' > /image_info.txt
 
