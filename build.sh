@@ -25,9 +25,6 @@ if [ -z "$local_repo_path" ] || [ -z "$remote_repo_path" ] ; then
     errchk 1 'Configuration variables in script not set. Assign values in script or set corresponding environment variables.'
 fi
 
-MC_VERSION="$1"
-image_tag="$MC_VERSION"
-
 # The project directory is the folder containing this script.
 project_dir=$( dirname "$0" )
 project_dir=$( ( cd "$project_dir" && pwd ) )
@@ -35,6 +32,9 @@ if [ -z "$project_dir" ] ; then
     errck 1 "Error: Could not determine project_dir."
 fi
 echo "Project directory is ${project_dir}."
+
+mc_version="$1"
+image_tag="$MC_VERSION"
 
 if [ -n "$image_tag" ] ; then
     local_repo_tag="${local_repo_path}/${repo_name}:${image_tag}"
