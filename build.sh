@@ -35,6 +35,8 @@ echo "Project directory is ${project_dir}."
 
 mc_version="$1"
 image_tag="$mc_version"
+git_hash=$( git log -1 --pretty=%h )
+
 
 if [ -n "$image_tag" ] ; then
     local_repo_tag="${local_repo_path}/${repo_name}:${image_tag}"

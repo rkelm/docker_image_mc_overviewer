@@ -14,8 +14,7 @@ RUN apt-get -y install wget gnupg > /dev/null
 RUN wget -nv -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add -
 RUN apt-get update && echo $DATE
 RUN apt-get -y install minecraft-overviewer > /dev/null
-RUN wget -nv https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar -P ~/.minecraft/versions/${
-MC_VERSION}/
+RUN wget -nv https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar -P ~/.minecraft/versions/${MC_VERSION}/
 
 RUN echo -e ' ************************************************** \n' \
   'Docker Image to run app ${APP_NAME} ${MC_VERSION}. \n' \
