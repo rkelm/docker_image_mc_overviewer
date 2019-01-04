@@ -34,7 +34,7 @@ fi
 echo "Project directory is ${project_dir}."
 
 mc_version="$1"
-image_tag="$MC_VERSION"
+image_tag="$mc_version"
 
 if [ -n "$image_tag" ] ; then
     local_repo_tag="${local_repo_path}/${repo_name}:${image_tag}"
@@ -46,7 +46,7 @@ fi
 
 # Build.
 echo "Building $local_repo_tag"
-APP_VERSION="${APP_VERSION}" docker build "${project_dir}" -t "${local_repo_tag}"
+APP_VERSION="${app_version}" docker build "${project_dir}" -t "${local_repo_tag}"
 errchk $? 'Docker build failed.'
 
 # Get image id.
